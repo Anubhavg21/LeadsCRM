@@ -55,9 +55,10 @@ export function AuthForm() {
       toast.success(mode === "signin" ? "Welcome back." : "Your workspace is ready.");
       router.replace("/");
       router.refresh();
-    } catch (e: any) {
+    } catch (e) {
       console.error("Unexpected error", e);
-      toast.error(e?.message ?? "Unexpected error");
+      const message = e instanceof Error ? e.message : "Unexpected error";
+      toast.error(message);
     } finally {
       setPending(false);
     }
